@@ -1,51 +1,52 @@
 # MOAVLink
 
-MOAVLink ‚Í **‰¹º”FŽ¯ + OpenAI API + VOICEVOX** ‚ð‘g‚Ý‡‚í‚¹‚ÄAƒLƒƒƒ‰ƒNƒ^[‚Æ‚ÌŽ©‘R‚È‰ï˜b‚ðŽÀŒ»‚·‚éƒI[ƒvƒ“ƒ\[ƒX‚Ìƒc[ƒ‹‚Å‚·B  
-F9ƒL[‚Å˜^‰¹AESCƒL[‚ÅI—¹‚Æ‚¢‚¤ƒVƒ“ƒvƒ‹‚È‘€ì‚ÅA‰¹º‚Ì“üo—Í‚Æ‰ï˜bƒƒO‚Ì•Û‘¶‚ðs‚¢‚Ü‚·B
+MOAVLink ã¯ **éŸ³å£°èªè­˜ + OpenAI API + VOICEVOX** ã‚’çµ„ã¿åˆã‚ã›ã¦ã€ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã¨ã®è‡ªç„¶ãªä¼šè©±ã‚’å®Ÿç¾ã™ã‚‹ã‚ªãƒ¼ãƒ—ãƒ³ã‚½ãƒ¼ã‚¹ã®ãƒ„ãƒ¼ãƒ«ã§ã™ã€‚  
+F9ã‚­ãƒ¼ã§éŒ²éŸ³ã€ESCã‚­ãƒ¼ã§çµ‚äº†ã¨ã„ã†ã‚·ãƒ³ãƒ—ãƒ«ãªæ“ä½œã§ã€éŸ³å£°ã®å…¥å‡ºåŠ›ã¨ä¼šè©±ãƒ­ã‚°ã®ä¿å­˜ã‚’è¡Œã„ã¾ã™ã€‚
 
 ---
 
-## “Á’¥
--  ‰¹º“ü—Í‚ðƒŠƒAƒ‹ƒ^ƒCƒ€‚ÅƒeƒLƒXƒg‰»
--  OpenAI API ‚ð—p‚¢‚½Ž©‘R‚È‰ž“š¶¬
--  VOICEVOX ‚ðŽg‚Á‚½‰¹ºo—Í
--  ‰ï˜bƒƒOE‹L‰¯‹@”\•t‚«i’ZŠú/’†Šú/’·Šúj
+## ç‰¹å¾´
+-  éŸ³å£°å…¥åŠ›ã‚’ãƒªã‚¢ãƒ«ã‚¿ã‚¤ãƒ ã§ãƒ†ã‚­ã‚¹ãƒˆåŒ–
+-  OpenAI API ã‚’ç”¨ã„ãŸè‡ªç„¶ãªå¿œç­”ç”Ÿæˆ
+-  VOICEVOX ã‚’ä½¿ã£ãŸéŸ³å£°å‡ºåŠ›
+-  ä¼šè©±ãƒ­ã‚°ãƒ»è¨˜æ†¶æ©Ÿèƒ½ä»˜ãï¼ˆçŸ­æœŸ/ä¸­æœŸ/é•·æœŸï¼‰
+-  ãƒ‡ãƒ¢å‹•ç”»[https://youtu.be/gpfVaMXgogM]
 
 ---
 
-## ƒCƒ“ƒXƒg[ƒ‹
-1. Python 3.11 ‚ðƒCƒ“ƒXƒg[ƒ‹
-2. –{ƒŠƒ|ƒWƒgƒŠ‚ðƒNƒ[ƒ“
+## ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
+1. Python 3.11 ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
+2. æœ¬ãƒªãƒã‚¸ãƒˆãƒªã‚’ã‚¯ãƒ­ãƒ¼ãƒ³
    ```bash
-   git clone https://github.com/ƒ†[ƒU[–¼/MOAVLink.git
+   git clone https://github.com/ãƒ¦ãƒ¼ã‚¶ãƒ¼å/MOAVLink.git
    cd MOAVLink
    pip install -r requirements.txt
 
 
-VOICEVOX ƒGƒ“ƒWƒ“‚ð•Ê“rƒZƒbƒgƒAƒbƒv‚µ‚Ä‚­‚¾‚³‚¢
+VOICEVOX ã‚¨ãƒ³ã‚¸ãƒ³ã‚’åˆ¥é€”ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—ã—ã¦ãã ã•ã„
 
-‰ŠúÝ’è
+åˆæœŸè¨­å®š
 
-config/config.ini ‚ð•ÒW‚µA•K—v‚ÈÝ’è‚ðs‚¢‚Ü‚·B
+config/config.ini ã‚’ç·¨é›†ã—ã€å¿…è¦ãªè¨­å®šã‚’è¡Œã„ã¾ã™ã€‚
 
-OpenAI API Key ‚ð“ü—Í
+OpenAI API Key ã‚’å…¥åŠ›
 
-Žg—p‚·‚éƒ}ƒCƒNƒfƒoƒCƒXƒCƒ“ƒfƒbƒNƒX‚ðÝ’è
+ä½¿ç”¨ã™ã‚‹ãƒžã‚¤ã‚¯ãƒ‡ãƒã‚¤ã‚¹ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã‚’è¨­å®š
 
-VOICEVOX ‚Ì host / port / speaker_id ‚ðŽw’è
+VOICEVOX ã® host / port / speaker_id ã‚’æŒ‡å®š
 
-Žg—p•û–@
+ä½¿ç”¨æ–¹æ³•
 
-start_app.bat ‚ðŽÀs
+start_app.bat ã‚’å®Ÿè¡Œ
 
-F9ƒL[‚Å˜^‰¹ŠJŽnAESCƒL[‚ÅI—¹
+F9ã‚­ãƒ¼ã§éŒ²éŸ³é–‹å§‹ã€ESCã‚­ãƒ¼ã§çµ‚äº†
 
-‰ï˜bƒƒO‚Í outputs/conversation_log.json ‚É•Û‘¶‚³‚ê‚Ü‚·
+ä¼šè©±ãƒ­ã‚°ã¯ outputs/conversation_log.json ã«ä¿å­˜ã•ã‚Œã¾ã™
 
-’ˆÓ
+æ³¨æ„
 
-OpenAI API ‚Ì—˜—p‚É‚Í•Ê“r API Key ‚ª•K—v‚Å‚·iŠeŽ©Žæ“¾‚µ‚Ä‚­‚¾‚³‚¢j
+OpenAI API ã®åˆ©ç”¨ã«ã¯åˆ¥é€” API Key ãŒå¿…è¦ã§ã™ï¼ˆå„è‡ªå–å¾—ã—ã¦ãã ã•ã„ï¼‰
 
-VOICEVOX ‚Ì—˜—p‚Íƒ‰ƒCƒZƒ“ƒX‚É]‚Á‚Ä‚­‚¾‚³‚¢
+VOICEVOX ã®åˆ©ç”¨ã¯ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ã«å¾“ã£ã¦ãã ã•ã„
 
-–{ƒvƒƒWƒFƒNƒg‚ÍŽï–¡EŒ¤‹†–Ú“I‚Å‚ ‚èA¤—p—˜—p‚Í‘z’è‚µ‚Ä‚¢‚Ü‚¹‚ñ
+æœ¬ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã¯è¶£å‘³ãƒ»ç ”ç©¶ç›®çš„ã§ã‚ã‚Šã€å•†ç”¨åˆ©ç”¨ã¯æƒ³å®šã—ã¦ã„ã¾ã›ã‚“
