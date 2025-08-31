@@ -10,7 +10,8 @@ F9キーで録音、ESCキーで終了というシンプルな操作で、音声
 -  OpenAI API を用いた自然な応答生成
 -  VOICEVOX を使った音声出力
 -  会話ログ・記憶機能付き（短期/中期/長期）
--  [![MOAVLink Demo](https://img.youtube.com/vi/gpfVaMXgogM/0.jpg)](https://youtu.be/gpfVaMXgogM)
+## 動作デモ
+[![MOAVLink Demo](https://img.youtube.com/vi/gpfVaMXgogM/0.jpg)](https://youtu.be/gpfVaMXgogM)
 
 ---
 
