@@ -10,6 +10,7 @@ F9ƒL[‚Å˜^‰¹AESCƒL[‚ÅI—¹‚Æ‚¢‚¤ƒVƒ“ƒvƒ‹‚È‘€ì‚ÅA‰¹º‚Ì“üo—Í‚Æ‰ï˜bƒƒO‚Ì•Û‘¶‚
 -  OpenAI API ‚ð—p‚¢‚½Ž©‘R‚È‰ž“š¶¬
 -  VOICEVOX ‚ðŽg‚Á‚½‰¹ºo—Í
 -  ‰ï˜bƒƒOE‹L‰¯‹@”\•t‚«i’ZŠú/’†Šú/’·Šúj
+-  [![MOAVLink Demo](https://img.youtube.com/vi/gpfVaMXgogM/0.jpg)](https://youtu.be/gpfVaMXgogM)
 
 ---
 
