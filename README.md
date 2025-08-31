@@ -5,22 +5,12 @@ F9ã‚­ãƒ¼ã§éŒ²éŸ³ã€ESCã‚­ãƒ¼ã§çµ‚äº†ã¨ã„ã†ã‚·ãƒ³ãƒ—ãƒ«ãªæ“ä½œã§ã€éŸ³å£°
 
 ---
 
-<<<<<<< HEAD:README.md
-## “Á’¥
--  ‰¹º“ü—Í‚ğƒŠƒAƒ‹ƒ^ƒCƒ€‚ÅƒeƒLƒXƒg‰»
--  OpenAI API ‚ğ—p‚¢‚½©‘R‚È‰“š¶¬
--  VOICEVOX ‚ğg‚Á‚½‰¹ºo—Í
--  ‰ï˜bƒƒOE‹L‰¯‹@”\•t‚«i’ZŠú/’†Šú/’·Šúj
--  [![MOAVLink Demo](https://img.youtube.com/vi/gpfVaMXgogM/0.jpg)](https://youtu.be/gpfVaMXgogM)
-=======
 ## ç‰¹å¾´
 -  éŸ³å£°å…¥åŠ›ã‚’ãƒªã‚¢ãƒ«ã‚¿ã‚¤ãƒ ã§ãƒ†ã‚­ã‚¹ãƒˆåŒ–
 -  OpenAI API ã‚’ç”¨ã„ãŸè‡ªç„¶ãªå¿œç­”ç”Ÿæˆ
 -  VOICEVOX ã‚’ä½¿ã£ãŸéŸ³å£°å‡ºåŠ›
 -  ä¼šè©±ãƒ­ã‚°ãƒ»è¨˜æ†¶æ©Ÿèƒ½ä»˜ãï¼ˆçŸ­æœŸ/ä¸­æœŸ/é•·æœŸï¼‰
-## å‹•ä½œãƒ‡ãƒ¢
-![MOAVLink Demo](https://img.youtube.com/vi/gpfVaMXgogM/0.jpg)(https://youtu.be/gpfVaMXgogM)
->>>>>>> 5aab456398e02871ad83b39c821217e043e8bd19:README.txt
+-  [![MOAVLink Demo](https://img.youtube.com/vi/gpfVaMXgogM/0.jpg)](https://youtu.be/gpfVaMXgogM)
 
 ---
 
