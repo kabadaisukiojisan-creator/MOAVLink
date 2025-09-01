@@ -1,9 +1,11 @@
+# --- 追加: 先頭付近に import を揃える ---
 import configparser, os, re, io, json, requests, sounddevice as sd, soundfile as sf
 from concurrent.futures import ThreadPoolExecutor
 
 # 設定読み込み
 config = configparser.ConfigParser()
 config.read("config/config.ini", encoding="utf-8")
+
 
 # 他の調整パラメータも読み込み
 if "VOICEVOX" not in config:
