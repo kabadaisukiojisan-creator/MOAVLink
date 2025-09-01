@@ -1,21 +1,28 @@
-# --- 追加: 先頭付近に import を揃える ---
 import configparser, os, re, io, json, requests, sounddevice as sd, soundfile as sf
 from concurrent.futures import ThreadPoolExecutor
 
 # 設定読み込み
 config = configparser.ConfigParser()
-config.read(os.path.join(os.path.dirname(__file__), "../config.ini"), encoding="utf-8")
+config.read("config/config.ini", encoding="utf-8")
 
 # 他の調整パラメータも読み込み
-BASE_URL = config.get("VOICEVOX", "base_url", fallback="http://127.0.0.1:50021")
-SPEAKER_ID = config.get("VOICEVOX", "speaker_id", fallback="1")
-SPEED_SCALE       = config.getfloat("VOICEVOX", "speedScale", fallback=1.0)
-PITCH_SCALE       = config.getfloat("VOICEVOX", "pitchScale", fallback=0.0)
-INTONATION_SCALE  = config.getfloat("VOICEVOX", "intonationScale", fallback=1.0)
-VOLUME_SCALE      = config.getfloat("VOICEVOX", "volumeScale", fallback=1.0)
-PAUSE_LENGTH      = config.getfloat("VOICEVOX", "pauseLength", fallback=0.1)
-PRE_PHONEME_LENGTH= config.getfloat("VOICEVOX", "prePhonemeLength", fallback=0.1)
-POST_PHONEME_LENGTH=config.getfloat("VOICEVOX", "postPhonemeLength", fallback=0.1)
+if "VOICEVOX" not in config:
+    raise RuntimeError("config.ini に [VOICEVOX] セクションがありません")
+
+VOICEVOX_HOST = config["VOICEVOX"]["host"]
+VOICEVOX_PORT = config["VOICEVOX"]["port"]
+SPEAKER_ID = int(config["VOICEVOX"]["speaker_id"])
+SPEED_SCALE= float(config["VOICEVOX"]["speedScale"])
+PITCH_SCALE = float(config["VOICEVOX"]["pitchScale"])
+INTONATION_SCALE = float(config["VOICEVOX"]["intonationScale"])
+VOLUME_SCALE = float(config["VOICEVOX"]["volumeScale"])
+PAUSE_LENGTH = float(config["VOICEVOX"]["pauseLength"])
+PRE_PHONEME_LENGTH = float(config["VOICEVOX"]["prePhonemeLength"])
+POST_PHONEME_LENGTH = float(config["VOICEVOX"]["postPhonemeLength"])
+
+VOICEVOX_HOST = config["VOICEVOX"]["host"]
+VOICEVOX_PORT = config["VOICEVOX"]["port"]
+BASE_URL = f"http://{VOICEVOX_HOST}:{VOICEVOX_PORT}"
 
 # 接続の再利用で速くする
 _session = requests.Session()
@@ -27,6 +34,7 @@ def _to_number(x, cast=float, default=None):
         return default if default is not None else cast(0)
 
 def _apply_query_params(q):
+    # ここで config の値を必ず数値にキャスト
     q["speedScale"]       = _to_number(SPEED_SCALE,       float, 1.0)
     q["pitchScale"]       = _to_number(PITCH_SCALE,       float, 0.0)
     q["intonationScale"]  = _to_number(INTONATION_SCALE,  float, 1.0)
