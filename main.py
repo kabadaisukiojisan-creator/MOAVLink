@@ -7,7 +7,7 @@ import shutil
 import simpleaudio as sa
 import random
 from recorder.speech_to_text import record_audio
-from chat.gpt_client import get_response, save_response
+from chat.gpt_client import get_response, save_response, stream_response
 from voice.voicevox_client import speak
 
 
@@ -18,6 +18,9 @@ RECORD_KEY = config["KEYS"]["record_key"]
 EXIT_KEY = config["KEYS"]["exit_key"]
 STANDBY_MESSAGE = [m.strip() for m in config["GENERAL"].get("standby_messages", "").split(",") if m.strip()]
 END_MESSAGE = [m.strip() for m in config["GENERAL"].get("end_messages", "").split(",") if m.strip()]
+
+# 追加: ストリーミング有効化フラグ（config.ini の [CHAT] に streaming = true/false を追加）
+USE_STREAMING = config["CHAT"].getboolean("streaming", fallback=False)
 
 is_processing = False  # 録音〜再生中ガード
 
@@ -54,10 +57,20 @@ def handle_recording():
         user_text = record_audio()
         if user_text:
             print("入力:", user_text)
-            response = get_response(user_text)
-            print("返答:", response)
-            save_response(response)
-            speak(response)
+            if USE_STREAMING:
+                print("返答（ストリーミング）:")
+                full_reply = ""
+                for segment in stream_response(user_text):
+                    print(segment, end="", flush=True)
+                    speak(segment)
+                    full_reply += segment
+                print()
+                save_response(full_reply)
+            else:
+                response = get_response(user_text)
+                print("返答:", response)
+                save_response(response)
+                speak(response)
             cleanup_response_and_record_dirs()
     except Exception as e:
         print(f"[ERROR] 録音処理エラー: {e}")
@@ -77,6 +90,7 @@ def main():
         speak(message)
         time.sleep(1)
     print("終了します")
+
 
 if __name__ == "__main__":
     main()
