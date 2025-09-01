@@ -1,4 +1,3 @@
-# 使用ライブラリ: openai(OpenAIクライアント), configparser, datetime, os, json
 from openai import OpenAI
 from datetime import datetime
 import os
@@ -24,13 +23,16 @@ for section in REQUIRED_SECTIONS:
 
 RESPONSES_DIR = config["GENERAL"]["responses_dir"]
 CHARACTER_PROMPT_FILE = config["CHAT"]["character_prompt_file"]
-MODEL = config["CHAT"]["model"]
+MODEL = config["CHAT"].get("model", "gpt-4o-mini")
 API_KEY = config["CHAT"]["api_key"]
+LONG_TERM_HITS = int(config["MEMORY"].get("long_term_hits",5))
+MID_TERM_DAYS = int(config["MEMORY"].get("mid_term_days", 3))
 LONG_TERM_MIN_SCORE = float(config["MEMORY"].get("long_term_min_score", 0.5))
 
 CONVERSATION_LOG = "outputs/conversation_log.json"
 
 client = OpenAI(api_key=API_KEY)
+
 
 def load_character_prompt():
     with open(CHARACTER_PROMPT_FILE, "r", encoding="utf-8") as f:
@@ -55,7 +57,7 @@ def get_response(user_input):
         raise RuntimeError("app.config の [MEMORY] セクションに正しい memory_level が設定されていません") from e
 
     # 短期記憶
-    short_history = load_conversation_history(limit=5)
+    short_history = load_conversation_history(limit=LONG_TERM_HITS)
     for h in short_history:
         messages.append({"role": "user", "content": h["user"]})
         messages.append({"role": "assistant", "content": h["assistant"]})
@@ -64,10 +66,9 @@ def get_response(user_input):
     # 中期記憶
     summary = ""
     if level >= 2:
-        mid_term_days = int(config["MEMORY"].get("mid_term_days", 3))
-        summary = load_summary(days=mid_term_days)
+        summary = load_summary(days=MID_TERM_DAYS)
         if summary:
-            messages.append({"role": "system", "content": f"過去3日分の要約:\n{summary}"})
+            messages.append({"role": "system", "content": f"過去\n{mid_term_days}日分の要約:\n{summary}"})
     save_memory_log("mid_term", {"summary": summary})
 
     # 長期記憶（検索のみ、保存はlevel=3）
@@ -91,13 +92,68 @@ def get_response(user_input):
         messages=messages,
         max_tokens=1000,
         temperature=0.9,  # 出力にバリエーションをもたせる
-        top_p=0.95         # 多様性を最大限許容
+        top_p=0.95        # 多様性を最大限許容
     )
     response_text = response.choices[0].message.content.strip()
 
     save_conversation(user_input, response_text)
 
     return response_text
+
+# --- ストリーミング応答 ---
+def stream_response(user_input):
+    prompt = load_character_prompt()
+
+    # --- 記憶レベル等 ---
+    memory_level = int(config["MEMORY"].get("memory_level", 1))
+
+    # --- メッセージ組み立て ---
+    messages = [{"role": "system", "content": prompt}]
+    try:
+        short_history = load_conversation_history(limit=5)
+        for h in short_history:
+            if h.get("user"):
+                messages.append({"role": "user", "content": h["user"]})
+            if h.get("assistant"):
+                messages.append({"role": "assistant", "content": h["assistant"]})
+    except Exception as e:
+        print(f"[WARNING] 短期記憶ロードをスキップ: {e}")
+
+    messages.append({"role": "user", "content": user_input})
+
+    # --- OpenAI 呼び出し（ストリーム） ---
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=messages,
+        temperature=0.9,
+        top_p=0.95,
+        stream=True,
+    )
+
+    # --- ストリーミング分割 ---
+    buffer = ""
+    full_text = ""
+    DELIMS = ("、", "。", "！", "？", "…")
+
+    for chunk in response:
+        delta = chunk.choices[0].delta
+        if delta and delta.content:
+            buffer += delta.content
+
+            # 30文字超えで区切る（stripで末尾空白/改行を吸収）
+            if any(buffer.strip().endswith(d) for d in DELIMS) or len(buffer.strip()) > 30:
+                seg = buffer.strip()
+                yield seg           # ← main.py 側で speak(seg) する
+                full_text += seg
+                buffer = ""
+
+    # 残りがあれば flush
+    if buffer.strip():
+        yield buffer
+        full_text += buffer
+
+    # 会話ログ保存（既存ヘルパ）
+    save_conversation(user_input, full_text.strip())
 
 def save_response(text):
     date_dir = os.path.join(RESPONSES_DIR, datetime.now().strftime("%Y%m%d"))
