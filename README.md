@@ -11,6 +11,8 @@ F9キーで録音、ESCキーで終了というシンプルな操作で、音声
 -  VOICEVOX を使った音声出力
 -  会話ログ・記憶機能付き（短期/中期/長期）
 -  [![MOAVLink Demo](https://img.youtube.com/vi/gpfVaMXgogM/0.jpg)](https://youtu.be/gpfVaMXgogM)
+-  [![MOAVLink 公開動画](https://img.youtube.com/vi/ectvxXsy8-0/0.jpg)](https://youtu.be/ectvxXsy8-0)
+ 
 
 ---
 
