@@ -1,0 +1,12 @@
+openai
+keyboard
+pyaudio
+SpeechRecognition
+requests
+pydub
+simpleaudio
+soundfile
+numpy
+scipy
+pandas
+pykakasi
