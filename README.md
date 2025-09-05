@@ -38,13 +38,15 @@ F9キーで録音開始、ESCキーで終了
 
 会話ログは outputs/conversation_log.json に保存されます
 
+---
+
 ## 修正箇所
 
--- coeiroinkが使用ができるように改修
--- main.pyの処理をmain_method.pyに分離
--- 環境構築BATの追加
--- 環境構築手順書の修正
--- requirements.txtの更新
+- coeiroinkが使用ができるように改修
+- main.pyの処理をmain_method.pyに分離
+- 環境構築BATの追加
+- 環境構築手順書の修正
+- requirements.txtの更新
 
 現在のツリー構造
 ./MOAVLink
@@ -120,7 +122,7 @@ F9キーで録音開始、ESCキーで終了
         コエイロインクエンジン設定ツール.bat             ←追加
         コエイロインクのキャラクター音声設定ツール.bat   ←追加
 
-
+---
 
 ## 注意
 
