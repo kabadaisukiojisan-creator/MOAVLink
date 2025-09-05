@@ -10,3 +10,7 @@ numpy
 scipy
 pandas
 pykakasi
+requests
+pydub
+pyaudio
+cython

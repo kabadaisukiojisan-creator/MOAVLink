@@ -1,0 +1,46 @@
+Speaker: ろさちゃん
+  UUID : 50c08f30-c8cd-11ec-8ab1-0242ac1c0002
+    Style: soft : 327965129
+    Style: soft/はきはき : 1863560156
+    Style: soft : Q : 1863560157
+    Style: quiet : 1624935238
+    Style: quiet/はきはき : 1505745522
+    Style: press : 1551844697
+    Style: yukkuri : 912216584
+    Style: faster : 2053618772
+    Style: mutter※試作版 : 801543906
+
+Speaker: 麗白つむぎ
+  UUID : 66148aee-5495-11ee-b32b-0242ac1c000c
+    Style: アンリアル : 105000000
+    Style: 双葉つむぎ(リアル) : 105000001
+
+Speaker: リセット＝マーズ
+  UUID : 803dbd0c-d89f-11ef-a53d-0242ac120002
+    Style: のーまる : 4820913746
+    Style: おこ : 801361075
+    Style: ささやき : 3311531624
+    Style: のーまゅ : 2092807463
+    Style: ちょっとおこ : 9129231791
+    Style: うぃすぱー : 7369788339
+    Style: だるい : 1841664913
+    Style: しょぼん : 594827360
+
+Speaker: あみたろ
+  UUID : d93140ec-d365-11ec-8f1d-0242ac1c0002
+    Style: るんるん : 1564398633
+    Style: よふかし : 918914705
+    Style: ささやき : 1645912170
+    Style: のーまるv5 : 1564398632
+    Style: まくしたて : 2147483647
+    Style: 穏やか : 304122957
+
+Speaker: リリンちゃん
+  UUID : cb11bdbd-78fc-4f16-b528-a400bae1782d
+    Style: のーまる : 90
+    Style: メスガキ : 92
+
+Speaker: つくよみちゃん
+  UUID : 3c37646f-3881-5374-2a83-149267990abc
+    Style: れいせい : 0
+
