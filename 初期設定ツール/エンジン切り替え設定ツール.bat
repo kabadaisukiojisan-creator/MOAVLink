@@ -21,25 +21,28 @@ for /f "usebackq delims=" %%A in (`
 )
 
 echo 現在のエンジン設定: %CURRENT_ENGINE%
+echo ============================
+echo  音声エンジン切り替え番号
+echo ============================
+echo.
+echo 1 : VoiceVox
+echo 2 : Coeiroink
+echo 3 : Aivis
+echo.
+set /p choice=番号を入力してください (1-3): 
 
-if /i "%CURRENT_ENGINE%"=="voicevox" (
-    set "NEW_ENGINE=coeiroink"
-    set "MESSAGE=VOICEVOX → COEIROINK に切り替えますか？ (y/n): "
-) else if /i "%CURRENT_ENGINE%"=="coeiroink" (
+if "%choice%"=="1" (
     set "NEW_ENGINE=voicevox"
-    set "MESSAGE=COEIROINK → VOICEVOX に切り替えますか？ (y/n): "
+) else if "%choice%"=="2" (
+    set "NEW_ENGINE=coeiroink"
+) else if "%choice%"=="3" (
+    set "NEW_ENGINE=aivis"
 ) else (
     echo 不明なエンジン設定です: %CURRENT_ENGINE%
     pause
     exit /b 1
 )
 
-set /p ANSWER=%MESSAGE%
-if /i "%ANSWER%" NEQ "y" (
-    echo キャンセルしました。設定は変更されません。
-    pause
-    exit /b 0
-)
 
 echo engine を %NEW_ENGINE% に切り替えています...
 
