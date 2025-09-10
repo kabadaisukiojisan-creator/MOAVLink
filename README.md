@@ -40,13 +40,33 @@ F9キーで録音開始、ESCキーで終了
 
 ---
 
+## 音声合成エンジンについて
+
+MOAVLink は複数の音声合成エンジンに対応しています。  
+ユーザーの環境や用途に応じて選択できます。
+
+### 対応エンジン
+- **VoiceVox**（デフォルト）  
+  無料で利用可能。ローカルで動作するため導入が簡単です。
+
+- **Coeiroink**  
+  高品質な音声合成と感情表現に対応。安定した利用が可能です。
+
+- **Aivis Cloud API**  
+  クラウド型の高速音声合成エンジンです。  
+  PCに専用エンジンをインストールする必要がなく、APIキーとモデルUUIDを設定することで利用できます。  
+  応答速度が非常に速く、自然なイントネーションが特徴です。  
+  ※ 利用には [Aivis Project]("https://hub.aivis-project.com/cloud-api/dashboard?_gl=1*q5le33*_ga*MTY3NjYxNzA4LjE3NTcyODYzOTA.*_ga_TEMWCS6D7B*czE3NTcyOTgzODIkbzMkZzEkdDE3NTcyOTg2MzgkajQxJGwwJGgw") から APIキーを取得する必要があります。
+
+### 切り替え方法
+`初期設定ツールフォルダ` の `エンジン切り替え設定ツール.bat` で使用するエンジンを設定できます。
+
+
+
 ## 修正箇所
 
-- coeiroinkが使用ができるように改修
-- main.pyの処理をmain_method.pyに分離
+- Aivis Projectの使用を追加
 - 環境構築BATの追加
-- 環境構築手順書の修正
-- requirements.txtの更新
 
 ## 現在のツリー構造
 ```text
@@ -54,7 +74,7 @@ F9キーで録音開始、ESCキーで終了
 │  LICENSE
 │  LICENSE_JP.md
 │  main.py                 ←修正
-│  mainm_ethod.py          ←追加
+│  mainm_ethod.py          ←修正
 │  MOAVLink起動ツール.bat
 │  README.txt
 │
@@ -70,8 +90,8 @@ F9キーで録音開始、ESCキーで終了
 │      conversation_viewer.py
 │
 ├─init
-│      requirements(full).txt  ←修正
-│      requirements.txt        ←修正
+│      requirements(full).txt
+│      requirements.txt
 │
 ├─memory
 │      vector_store.py
@@ -104,7 +124,8 @@ F9キーで録音開始、ESCキーで終了
 │
 ├─voice
 │     voicevox_client.py
-│     coeiroink_client.py          ←追加
+│     coeiroink_client.py
+│     aivis_client.py          ←追加
 │
 ├─リファレンス
 │      MOAVLink公開動画.pdf
@@ -119,9 +140,11 @@ F9キーで録音開始、ESCキーで終了
         マイク設定ツール.bat
         初期化ツール.bat
         記憶設定変更ツール.bat
-        エンジン切り替え設定ツール.bat                   ←追加
-        コエイロインクエンジン設定ツール.bat             ←追加
-        コエイロインクのキャラクター音声設定ツール.bat   ←追加
+        エンジン切り替え設定ツール.bat  ←修正
+        コエイロインクエンジン設定ツール.bat
+        コエイロインクのキャラクター音声設定ツール.bat
+        アイビスAPI_KEY設定ツール.bat   ←追加
+        アイビスエンジン設定ツール .bat ←追加
 ```
 ---
 
@@ -129,7 +152,11 @@ F9キーで録音開始、ESCキーで終了
 
 OpenAI API の利用には別途 API Key が必要です（各自取得してください）
 
-VOICEVOX 及び COEIROINK の利用はライセンスに従ってください
+Aivis Projectを使用する場合はAPI KEYが必要です（各自取得してください）
+※クラウド版は現在封鎖されています(2025/09/10現在）使用できません
+※キャラを変更したい場合は、Aivisの操作が必要になりますconfig.iniに記載していますので参照してください
+
+VOICEVOX, COEIROINK, Aivisの利用はライセンスに従ってください
 
 本プロジェクトは趣味・研究目的であり、商用利用は想定していません
 

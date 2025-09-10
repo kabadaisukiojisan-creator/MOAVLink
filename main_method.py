@@ -5,6 +5,7 @@ import time
 import ctypes
 import shutil
 import json
+import requests
 import configparser
 import simpleaudio as sa
 
@@ -22,6 +23,8 @@ USE_STREAMING = config["CHAT"].getboolean("streaming", fallback=False)
 ENGINE = config.get("SPEECH_ENGINE", "engine", fallback="voicevox").lower()
 if ENGINE == "coeiroink":
     from voice.voicecoeiroink_client import speak
+elif ENGINE == "aivis":
+    from voice.aivis_client import speak
 else:
     from voice.voicevox_client import speak
 
@@ -33,15 +36,29 @@ VOICEVOX_PATH = None
 
 if ENGINE == "voicevox":
     VOICEVOX_PATH = config.get("VOICEVOXENGINE", "windows_directml", fallback="").strip()
+    HOST = config["VOICEVOX"].get("host", "127.0.0.1")
+    PORT = config["VOICEVOX"].get("port", "50021")
     if not VOICEVOX_PATH or not os.path.isfile(VOICEVOX_PATH):
         raise FileNotFoundError(f"VOICEVOXエンジンの実行ファイルが見つかりません: {VOICEVOX_PATH}")
 
 COEIROINK_PATH = None
 if ENGINE == "coeiroink":
     COEIROINK_PATH = config.get("COEIROINKENGINE", "coeiroink_directml", fallback="").strip()
+    HOST = config["COEIROINK"].get("host", "127.0.0.1")
+    PORT = config["COEIROINK"].get("port", "50032")
     if not COEIROINK_PATH or not os.path.isfile(COEIROINK_PATH):
         raise FileNotFoundError(f"COEIROINKエンジンの実行ファイルが見つかりません: {COEIROINK_PATH}")
 
+AIVIS_PATH = None
+if ENGINE == "aivis":
+    AIVIS_PATH = config.get("AIVISENGINE", "aivis_directml", fallback="").strip()
+    HOST = config["AIVIS"].get("host", "127.0.0.1")
+    PORT = config["AIVIS"].get("port", "10101")
+    GPU_MODE = config["AIVIS"].get("gpu", "n")
+    if not AIVIS_PATH or not os.path.isfile(AIVIS_PATH):
+        raise FileNotFoundError(f"AIVISENGINEエンジンの実行ファイルが見つかりません: {AIVIS_PATH}")
+
+DOCS_URL = f"http://{HOST}:{PORT}/docs"
 
 gui_process = None
 is_processing = False  # 録音〜再生中ガード
@@ -51,29 +68,64 @@ engine_process = None
 def start_engine():
     exe_path = None
     if ENGINE == "voicevox":
-        exe_path = VOICEVOX_PATH
+        return start_generic_engine(VOICEVOX_PATH)
     elif ENGINE == "coeiroink":
-        exe_path = COEIROINK_PATH
+        return start_generic_engine(COEIROINK_PATH)
+    elif ENGINE == "aivis":
+        return start_aivis_engine()
 
+def start_generic_engine(path):
     global engine_process
-
-    print(f"エンジン起動中... ({exe_path})")
-    engine_process = subprocess.Popen([exe_path])
-    time.sleep(3)  # 起動待ち
+    print(f"エンジン起動中... ({path})")
+    engine_process = subprocess.Popen([path])
+    
+    for _ in range(30):  # 最大30回（30秒）
+        try:
+            res = requests.get(DOCS_URL)
+            if res.status_code == 200:
+                print("エンジン起動完了！")
+                return True
+        except Exception:
+            pass
+        time.sleep(1)
+    raise RuntimeError("エンジンが起動しませんでした。")
     print("エンジン起動完了！")
     return True
+
+def start_aivis_engine():
+
+    global engine_process
+    engine_process = aivis_engine()
+        
+    for _ in range(30):  # 最大30回（30秒）
+        try:
+            res = requests.get(DOCS_URL)
+            if res.status_code == 200:
+                print("Aivisエンジン起動完了！")
+                return True
+        except Exception:
+            pass
+        time.sleep(1)
+    raise RuntimeError("Aivisエンジンが起動しませんでした。")
+
+def aivis_engine():
+    if GPU_MODE == "y":
+        return subprocess.Popen(["py", "-3.11", AIVIS_PATH, "--use_gpu"])
+    else:
+        return subprocess.Popen(["py", "-3.11", AIVIS_PATH])
+
 
 def stop_engine():
     global engine_process
     if engine_process:
-        print("VOICEVOXエンジンを終了します...")
+        print("エンジンを終了します...")
         engine_process.terminate()
         try:
             engine_process.wait(timeout=5)
         except subprocess.TimeoutExpired:
             engine_process.kill()
         engine_process = None
-        print("VOICEVOXエンジンを終了しました。")
+        print("エンジンを終了しました。")
 
 
 def bring_console_to_front():

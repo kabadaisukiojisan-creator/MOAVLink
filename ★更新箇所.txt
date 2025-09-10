@@ -1,0 +1,84 @@
+・AIVIS(クラウド、エンジン）が使用ができるように改修
+・環境構築BATの追加
+・環境構築手順書の修正
+・requirements.txtの更新
+
+現在のツリー構造
+./MOAVLink
+│  LICENSE
+│  LICENSE_JP.md
+│  main.py                 ←修正
+│  main_method.py          ←修正
+│  MOAVLink起動ツール.bat
+│  README.txt
+│
+├─chat
+│      conversation_manager.py
+│      gpt_client.py
+│
+├─config
+│      character_prompt.txt
+│      config.ini         ←修正
+│
+├─gui
+│      conversation_viewer.py
+│
+├─init
+│      requirements(full).txt
+│      requirements.txt
+│
+├─memory
+│      vector_store.py
+│
+├─outputs
+│  │  conversation_log.json
+│  │  gui_log.json
+│  │  sqlite.py
+│  │  vector_store.db
+│  │
+│  ├─memory_logs
+│  │      long_term.json
+│  │      mid_term.json
+│  │      short_term.json
+│  │
+│  ├─records
+│  ├─responses
+│  └─temp_audio
+│        temp.wav
+│
+├─recorder
+│       speech_to_text.py
+│
+├─sounds
+│      beep.wav
+│      timeout.wav
+│      timeout_BK.wav
+│
+├─tool
+│      get_default_mic_id.py
+│      list_microphones.py
+│
+├─voice
+│     voicevox_client.py
+│     coeiroink_client.py
+│     coeiroink_client.py
+│     aivis_client.py    ←追加
+│
+├─リファレンス
+│      MOAVLink公開動画.pdf
+│      MOAVLink公開動画.pptx
+│      環境構築手順.txt
+│
+└─初期設定ツール
+        API_KEY設定ツール.bat
+        DB内容取得ツール.bat
+        アイビスAPI_KEY設定ツール.bat
+        アイビスエンジン設定ツール .bat
+        キャラクター音声設定ツール.bat
+        ボイスボエンジン設定ツール.bat
+        マイク設定ツール.bat
+        初期化ツール.bat
+        記憶設定変更ツール.bat
+        エンジン切り替え設定ツール.bat
+        コエイロインクエンジン設定ツール.bat
+        コエイロインクのキャラクター音声設定ツール.bat

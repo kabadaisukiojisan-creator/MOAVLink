@@ -1,4 +1,0 @@
-スマホでSonoBosを使う場合
-規定マイクはVAVCを使用
-規定スピーカーはYANMAHA AG03を使用
-YANMAHA AG03の物理スイッチをLoopBackに入れておくこと

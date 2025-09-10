@@ -14,12 +14,15 @@ config = configparser.ConfigParser()
 config.read("config/config.ini", encoding="utf-8")
 
 # speak処理のimport
-engine = config.get("SPEECH_ENGINE", "engine", fallback="voicevox").lower()
-if engine == "coeiroink":
+ENGINE = config.get("SPEECH_ENGINE", "engine", fallback="voicevox").lower()
+if ENGINE == "coeiroink":
     from voice.voicecoeiroink_client import speak
+elif ENGINE == "aivis":
+    from voice.aivis_client import speak
 else:
     from voice.voicevox_client import speak
 
+MODE = config["AIVIS"]["mode"]
 EXIT_KEY = config["KEYS"]["exit_key"]
 RECORD_KEY = config["KEYS"]["record_key"]
 END_MESSAGE = [m.strip() for m in config["GENERAL"].get("end_messages", "").split(",") if m.strip()]
@@ -27,8 +30,11 @@ STANDBY_MESSAGE = [m.strip() for m in config["GENERAL"].get("standby_messages", 
 
 def main():
     # エンジン起動
-    if not start_engine():
-        return  # 起動失敗なら終了
+    if ENGINE == "aivis" and MODE == "cloud":
+        pass  # 何もしない
+    else :
+        if not start_engine():
+            return  # 起動失敗なら終了
 
     #ログ表示GUI起動
     init_gui_log()
@@ -48,13 +54,19 @@ def main():
 
     # VOICEVOXエンジンを終了
     stop_gui() 
-    stop_engine()
+    if ENGINE == "aivis" and MODE == "cloud":
+        pass
+    else :
+        stop_engine()
     bring_console_to_front()
 
 if __name__ == "__main__":
     try:
         main()
     finally:
-        stop_engine()
+        if ENGINE == "aivis" and MODE == "cloud":
+            pass
+        else :
+            stop_engine()
         stop_gui() 
         sys.exit(0)
